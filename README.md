@@ -30,8 +30,8 @@ Filtered out items with a total quantity=0.
 Wrote the result to a CSV file (output.csv).
 
 test.db is the database 
-sql_analysis.sql: Contains the SQL queries used for analysis.
-pandas_analysis.py: Contains the Python code using Pandas for analysis.
+Sql_Analysis.sql: Contains the SQL queries used for analysis.
+Pandas_analysis.py: Contains the Python code using Pandas for analysis.
 output.csv: Output file containing the analysis results.
 
 Conclusion
