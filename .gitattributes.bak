@@ -1,0 +1,30 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+-- Create a temporary table to store the result
+CREATE TEMP TABLE temp_result AS
+SELECT
+    c.customer_id AS Customer,
+    c.age AS Age,
+    i.item_id AS Item,
+    SUM(ot.Quantity) AS Quantity
+FROM
+    customer_table c
+    JOIN sales_table st ON c.customer_id = st.customer_id
+    JOIN order_id_table ot ON st.sale_id = ot.sales_id
+    JOIN items_table i ON ot.item_id = i.item_id
+WHERE
+    c.age BETWEEN 18 AND 35
+GROUP BY
+    c.customer_id,
+    i.item_id;
+
+-- Filter out items with total quantity=0
+DELETE FROM temp_result WHERE Quantity = 0;
+
+-- Export the result to a CSV file
+.mode csv
+.headers on
+.output output.csv
+SELECT * FROM temp_result;
+.output stdout
